@@ -1,10 +1,13 @@
-//www.downtok.in
+//www.pokedex.downtok.in
 let config;
+
 window.onload = function () {
   $("#spinner").show(); //shows loader
+
   changeTheme(localStorage.getItem("darkMode")); //select theme
   const urlParams = new URLSearchParams(window.location.search);
-  const gameScore = urlParams.get("score");
+
+  const searchQuery = urlParams.get("searchtoken");
 
   saveViewCount(); // save page views
 
@@ -18,58 +21,12 @@ window.onload = function () {
         config = responseJSON;
         getSessionCount();
       });
-  } else if (window.location.pathname === "/result.html") {
-    if (!gameScore) {
-      window.location.replace("/pages/404.html");
+
+    if (searchQuery) {
+      getPokemonDetails(searchQuery);
     }
-
-    $(document).ready(function () {
-      //set share links
-      var instaLink =
-        "intent:#Intent;scheme=http;package=com.instagram.android;end";
-
-      var whatsappLink =
-        "https://api.whatsapp.com/send?text=Hey%21%20I%20got%20" +
-        gameScore +
-        " seconds!%20Can%20you%20beat%20my%20score?%20try%20now%3A%20 https://www.downtok.in";
-
-      var twitterLink =
-        "https://twitter.com/share?hashtags=downtok.in&text=Hey%21+I+got+" +
-        gameScore +
-        " seconds" +
-        "%21%20Can+you+beat+my+score?+try+now+%3A";
-
-      var copyLink =
-        "Hey! I got " +
-        gameScore +
-        " seconds! " +
-        "Can you beat my score? try now: https://downtok.in";
-
-      //hide loader
-      $("#spinner").hide();
-      //populate score
-      $("h1#score").text(gameScore);
-      // set value in share input box
-      document.getElementById("share-link").value = copyLink;
-
-      //share buttons
-      $("button.share-btn").click(function () {
-        switch (this.id) {
-          case "whatsapp-link":
-            window.open(whatsappLink);
-            break;
-          case "twitter-link":
-            window.open(twitterLink);
-            break;
-          case "copy-link":
-            var copyText = document.getElementById("share-link");
-            copyText.select();
-            document.execCommand("copy");
-            $(".toast").toast("show");
-            break;
-        }
-      });
-    });
+  } else {
+    window.location.replace("/pages/404.html");
   }
 };
 
@@ -132,6 +89,10 @@ function changeTheme(userPref) {
       }
     } else {
       $(".dark-th").css("color", "rgba(0,0,0,.5)");
+      $("body").css(
+        "background-image",
+        " url(assets/pokemon_background - dark.png)"
+      );
       $("#theme-toggle").prop("checked", false);
       if (deviceWidth < 575) {
         $("body").css("background-color", "#ecf0f3");
@@ -140,4 +101,37 @@ function changeTheme(userPref) {
       }
     }
   });
+}
+
+function btnActivation() {
+  if (document.getElementById("search-box").value === "") {
+    document.getElementById("search-btn").disabled = true;
+  } else {
+    document.getElementById("search-btn").disabled = false;
+  }
+}
+
+function getPokemonDetails(searchQuery) {
+  // remove attached items & start loader
+
+  $(document).ready(function () {
+    $("#errormessage").each(function () {
+      $(this).remove();
+    });
+
+    $("#downloads").empty();
+
+    $("#spinner").show(); //shows loader
+  });
+
+  url =
+    "http://pokedex-back-end.herokuapp.com/api/v1/pokemon?searchtoken=" +
+    searchQuery;
+
+  fetch(url)
+    .then((response) => response.json())
+
+    .then((responseJson) => {
+      console.log(responseJson);
+    });
 }
