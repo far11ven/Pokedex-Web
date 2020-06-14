@@ -60,7 +60,112 @@ window.onload = function () {
                  `
                 );
 
-              $("#result").append(`<div id="poke_details" class=""> </div>`);
+              $("#result").append(
+                `<div id="poke_details">
+              <div class="container ">
+								<ul class="nav nav-pills nav-justified poke-tab-header" role="tablist" data-tabs="tabs">
+									<li class="col-md-6 header"><a href="#details" data-toggle="tab">Basic</a></li>
+									<li class="col-md-6 header"><a href="#stats" data-toggle="tab">Stats</a></li>
+								</ul>
+								<div class="tab-content">
+									<div role="tabpanel" class="tab-pane fade show active" id="details">
+										<table id="basic" class="table table-striped border-success text-center">
+											<thead class="thead-dark">
+											</thead>
+                      <tbody>
+                      <tr>
+                      <th scope="col" name="name">Name</th>
+                      <td scope="col" name="name">` +
+                  searchResult.info.name +
+                  `</td>
+                    </tr>
+                    <tr>
+                    <th scope="col" name="id">Id</th>
+                      <td scope="col" name="id">` +
+                  searchResult.info.id +
+                  `</td>
+                    </tr>
+                    <tr>
+                    <th scope="col" name="species_name">Species Name</th>
+                      <td scope="col" name="species_name">` +
+                  searchResult.info.species_name +
+                  `</td>
+                    </tr>
+                    <tr>
+                    <th scope="col" name="type">Type</th>
+                      <td scope="col" name="type">` +
+                  searchResult.info.types +
+                  `</td>
+                    </tr>
+                    <tr>
+                    <th scope="col" name="height">Height</th>
+                      <td scope="col" name="height">` +
+                  searchResult.info.height +
+                  `</td>
+                    </tr>
+                    <tr>
+                    <th scope="col" name="weight">Weight</th>
+                      <td scope="col" name="weight">` +
+                  searchResult.info.weight +
+                  `</td>
+                    </tr>
+                    <tr>
+                    <th scope="col" name="abilities">Abilities</th>
+                      <td scope="col" name="abilities">` +
+                  searchResult.info.abilities +
+                  `</td>
+                    </tr>
+											</tbody>
+										</table>
+									</div>
+									<div role="tabpanel" class="tab-pane fade" id="stats">
+										<table id="stats" class="table table-striped border-success text-center">
+											<thead class="thead-dark">
+											</thead>
+                      <tbody>
+                      <tr>
+                      <th scope="col" name="hp">HP</th>
+                      <td scope="col" name="hp">` +
+                  searchResult.info.stats["hp"] +
+                  `</td>
+                    </tr>
+                    <tr>
+                    <th scope="col" name="attack">Attack</th>
+                      <td scope="col" name="attack">` +
+                  searchResult.info.stats["attack"] +
+                  `</td>
+                    </tr>
+                    <tr>
+                    <th scope="col" name="defense">defense</th>
+                      <td scope="col" name="defense">` +
+                  searchResult.info.stats["defense"] +
+                  `</td>
+                    </tr>
+                    <tr>
+                    <th scope="col" name="special_attack">Special Attack</th>
+                      <td scope="col" name="special_attack">` +
+                  searchResult.info.stats["special-attack"] +
+                  `</td>
+                    </tr>
+                    <tr>
+                    <th scope="col" name="special-defense">Special Defense</th>
+                      <td scope="col" name="special-defense">` +
+                  searchResult.info.stats["special-defense"] +
+                  `</td>
+                    </tr>
+                    <tr>
+                    <th scope="col" name="speed">Speed</th>
+                      <td scope="col" name="speed">` +
+                  searchResult.info.stats["speed"] +
+                  `</td>
+                    </tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+              `
+              );
             });
           } else {
             $(document).ready(function () {
@@ -142,19 +247,21 @@ function changeTheme(userPref) {
       if (deviceWidth < 575) {
         $("body").css("background-color", "#12253c");
       } else {
-        $("body").css("background-color", "#12253c");
+        $("body").css(
+          "background-image",
+          "url(/assets/pokemon_background_dark.png)"
+        );
       }
     } else {
       $(".dark-th").css("color", "rgba(0,0,0,.5)");
-      $("body").css(
-        "background-image",
-        " url(assets/pokemon_background - dark.png)"
-      );
       $("#theme-toggle").prop("checked", false);
       if (deviceWidth < 575) {
         $("body").css("background-color", "#ecf0f3");
       } else {
-        $("body").css("background-color", "#ecf0f3");
+        $("body").css(
+          "background-image",
+          "url(/assets/pokemon_background.png)"
+        );
       }
     }
   });

@@ -6,9 +6,6 @@
 
 body {
   background-image: url(assets/pokemon_background.png);
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
   background-size: cover;
 }
 
@@ -22,6 +19,11 @@ body {
 
 .title > a:hover {
   text-decoration: none;
+}
+
+.poke-tab-header {
+  line-height: 3rem;
+  background-color: darkgray;
 }
 
 .header {
@@ -310,7 +312,11 @@ a.back-to-home:hover {
 
 /* SEARCH RESULT */
 #result {
-  margin-top: 1rem;
+  margin-top: 2rem;
+}
+
+div#poke_details {
+  margin-top: 2rem;
 }
 
 a.card-link {
