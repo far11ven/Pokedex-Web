@@ -9,6 +9,10 @@ window.onload = function () {
 
   const searchQuery = urlParams.get("searchtoken");
 
+  document.getElementById("search-box").value = searchQuery;
+
+  btnActivation(); //make btn deactivated by deafult, when searchtoken is empty
+
   saveViewCount(); // save page views
 
   if (
@@ -23,7 +27,60 @@ window.onload = function () {
       });
 
     if (searchQuery) {
-      getPokemonDetails(searchQuery);
+      getPokemonDetails(searchQuery)
+        .then((searchResult) => {
+          if (searchResult.message === "Pokemon found") {
+            $(document).ready(function () {
+              $("#result").append(
+                '<span class="success-message"> Pokemon found : <span id="poke_name">' +
+                  searchResult.info.name +
+                  "</span></span>"
+              );
+
+              $("#result").append(
+                `<div id="image-results" class="image-reel"> </div>`
+              );
+
+              for (var i = 0; i < searchResult.info.images.length; i++)
+                $("#image-results").append(
+                  `<a id="image_link" class="card-link" href="` +
+                    searchResult.info.images[i] +
+                    `" target="_blank">
+
+                    <img id="pokeimage_` +
+                    (i + 1) +
+                    `" class="card-thumbnail" src="` +
+                    searchResult.info.images[i] +
+                    `"/>
+
+                    <div class="card-button">
+                     <span> Download</span>
+                    </div>
+                  </a>
+                 `
+                );
+
+              $("#result").append(`<div id="poke_details" class=""> </div>`);
+            });
+          } else {
+            $(document).ready(function () {
+              $("#result").append(
+                '<span class="error-message"> Pokemon Not found : <span id="poke_name">' +
+                  searchQuery +
+                  "</span></span>"
+              );
+            });
+          }
+        })
+        .catch((err) => {
+          $(document).ready(function () {
+            $("#result").append(
+              '<span class="error-message"> Pokemon Not found : <span id="poke_name">' +
+                err +
+                "</span></span>"
+            );
+          });
+        });
     }
   } else {
     window.location.replace("/pages/404.html");
@@ -111,7 +168,7 @@ function btnActivation() {
   }
 }
 
-function getPokemonDetails(searchQuery) {
+getPokemonDetails = (searchQuery) => {
   // remove attached items & start loader
 
   $(document).ready(function () {
@@ -125,13 +182,8 @@ function getPokemonDetails(searchQuery) {
   });
 
   url =
-    "http://pokedex-back-end.herokuapp.com/api/v1/pokemon?searchtoken=" +
+    "https://pokedex-back-end.herokuapp.com/api/v1/pokemon?searchtoken=" +
     searchQuery;
 
-  fetch(url)
-    .then((response) => response.json())
-
-    .then((responseJson) => {
-      console.log(responseJson);
-    });
-}
+  return fetch(url).then((response) => response.json());
+};
