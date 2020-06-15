@@ -35,8 +35,6 @@ body {
 }
 
 .overlay.jumbotron {
-  height: 600px;
-  width: 100vw;
   background: black;
   overflow: hidden;
   background: #c33764; /* fallback colour. Make sure this is just one solid colour. */
@@ -44,9 +42,9 @@ body {
       rgba(29, 38, 113, 0.8),
       rgba(195, 55, 100, 0.8)
     ),
-    url(assets/pokemon_background.png);
+    url();
   background: linear-gradient(rgba(29, 38, 113, 0.8), rgba(195, 55, 100, 0.8)),
-    url(assets/pokemon_background.png); /* The least supported option. */
+    url(); /* The least supported option. */
 }
 
 .poke-tab-header {
