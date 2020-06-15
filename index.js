@@ -64,8 +64,8 @@ window.onload = function () {
                 `<div id="poke_details">
               <div class="container ">
 								<ul class="nav nav-pills nav-justified poke-tab-header" role="tablist" data-tabs="tabs">
-									<li class="col-md-6 header"><a href="#details" data-toggle="tab">Basic</a></li>
-									<li class="col-md-6 header"><a href="#stats" data-toggle="tab">Stats</a></li>
+									<li class="col-md-6 tab-header"><a href="#details" data-toggle="tab">Basic</a></li>
+									<li class="col-md-6 tab-header"><a href="#stats" data-toggle="tab">Stats</a></li>
 								</ul>
 								<div class="tab-content">
 									<div role="tabpanel" class="tab-pane fade show active" id="details">
@@ -241,18 +241,7 @@ function changeTheme(userPref) {
   var deviceWidth = Math.max(window.screen.width, window.innerWidth);
   console.log("deviceWidth :", deviceWidth);
   $(document).ready(function () {
-    if (userPref === "true") {
-      $(".dark-th").css("color", "#ffffff");
-      $("#theme-toggle").prop("checked", true);
-      if (deviceWidth < 575) {
-        $("body").css("background-color", "#12253c");
-      } else {
-        $("body").css(
-          "background-image",
-          "url(/assets/pokemon_background_dark.png)"
-        );
-      }
-    } else {
+    if (userPref === "false") {
       $(".dark-th").css("color", "rgba(0,0,0,.5)");
       $("#theme-toggle").prop("checked", false);
       if (deviceWidth < 575) {
@@ -261,6 +250,17 @@ function changeTheme(userPref) {
         $("body").css(
           "background-image",
           "url(/assets/pokemon_background.png)"
+        );
+      }
+    } else {
+      $(".dark-th").css("color", "#ffffff");
+      $("#theme-toggle").prop("checked", true);
+      if (deviceWidth < 575) {
+        $("body").css("background-color", "#12253c");
+      } else {
+        $("body").css(
+          "background-image",
+          "url(/assets/pokemon_background_dark.png)"
         );
       }
     }

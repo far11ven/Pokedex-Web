@@ -62,7 +62,7 @@
 	</nav>
 
 	<div class="container-fluid p-2">
-		<div class="text-center">
+		<div class="overlay jumbotron text-center">
 
 			<div class="container h-100">
 				<div class="row h-100 justify-content-center align-items-center">
@@ -72,14 +72,15 @@
 
 						<a href="/"><img class="logo" src="/assets/pokedex.png" /></a>
 						<h1 class="title"><a href="/"><strong>PokéDex</strong></a></h1>
-						<p class="desc">Gotta know'em all</p>
+						<p class="desc dark-th">Gotta know'em all</p>
+						<br>
 						<div class="message" style="display:none;"> </div>
 						<br>
 
 						<form id="search-form" class="navbar-form" role="search">
 							<div class="input-group">
 
-								<input class="form-control" name="searchtoken" id="search-box"
+								<input class="form-control dark-th" name="searchtoken" id="search-box"
 									placeholder="Enter Poké name or index" type="search" oninput="btnActivation()"
 									onchange="btnActivation()">
 
@@ -87,7 +88,7 @@
 
 									<button id="search-btn" class="btn btn-default" type="submit"><i
 											class="fas fa-search"></i>
-										<span>find it </span> </button>
+									</button>
 
 								</div>
 
@@ -150,7 +151,10 @@
 
 						</div>
 
-						<div id="stats_banner" style="padding: 15px; color: rgba(0, 0, 0, 0.5);" class="dark-th">
+						<br>
+
+						<div id="stats_banner" style="padding: 15px; color: rgba(0, 0, 0, 0.5); display:none;"
+							class="dark-th">
 
 							<h4 id="sudostats">
 

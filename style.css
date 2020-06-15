@@ -1,12 +1,25 @@
 @media (max-width: 575px) {
-  #search-btn > span {
-    display: none;
+  #search-btn,
+  input#search-box {
+    height: 3rem;
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 575px) {
+  #search-btn,
+  input#search-box {
+    height: 5rem;
+    font-size: 3rem;
   }
 }
 
 body {
   background-image: url(assets/pokemon_background.png);
   background-size: cover;
+  position: relative;
+  transition: background-color 1s;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .title {
@@ -21,41 +34,69 @@ body {
   text-decoration: none;
 }
 
+.overlay.jumbotron {
+  height: 600px;
+  width: 100vw;
+  background: black;
+  overflow: hidden;
+  background: #c33764; /* fallback colour. Make sure this is just one solid colour. */
+  background: -webkit-linear-gradient(
+      rgba(29, 38, 113, 0.8),
+      rgba(195, 55, 100, 0.8)
+    ),
+    url(assets/pokemon_background.png);
+  background: linear-gradient(rgba(29, 38, 113, 0.8), rgba(195, 55, 100, 0.8)),
+    url(assets/pokemon_background.png); /* The least supported option. */
+}
+
 .poke-tab-header {
   line-height: 3rem;
   background-color: darkgray;
 }
 
-.header {
+.tab-header {
   color: #000;
   text-decoration: none;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.5em;
   display: inline-block;
   position: relative;
 }
 
-.header:after {
+.tab-header a {
+  color: white;
+  font-weight: bold;
+}
+.tab-header a:hover {
+  color: white;
+  font-weight: bold;
+}
+
+.tab-header:after {
   background: none repeat scroll 0 0 transparent;
   bottom: 0;
   content: "";
   display: block;
-  height: 2px;
+  height: 3px;
   left: 50%;
   position: absolute;
-  background: #01f8f0;
+  background: #007bf9;
   transition: width 0.3s ease 0s, left 0.3s ease 0s;
   width: 0;
   cursor: default;
 }
 
-.header:hover:after {
+.tab-header:hover:after {
   width: 100%;
   left: 0;
 }
 
-.header.active {
+.tab-header.active {
   border: 0.1rem solid #01f8f0;
   font-weight: bold;
+}
+
+.tab-content {
+  background-color: aliceblue;
 }
 
 #search-btn {
@@ -67,11 +108,9 @@ body {
 }
 
 #search-btn:hover {
-  border: 1.1px solid #007bff;
   background: none repeat scroll 0 0 rgba(255, 255, 255, 0.35);
   box-shadow: 0 0 0 0px #fff inset;
   color: #007bff;
-  border-radius: 0rem;
 }
 
 #search-btn:disabled,
@@ -88,7 +127,7 @@ input#search-box {
   background-color: transparent !important;
   border: 1.5px solid #ced4da;
   border-radius: none;
-  color: grey;
+  color: black;
   font-family: Quicksand;
 }
 
