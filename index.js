@@ -27,6 +27,7 @@ window.onload = function () {
       });
 
     if (searchQuery) {
+	  $("#spinner").show();
       getPokemonDetails(searchQuery)
         .then((searchResult) => {
           if (searchResult.message === "Pokemon found") {
@@ -166,6 +167,7 @@ window.onload = function () {
 							</div>
               `
               );
+			  $("#spinner").hide();
             });
           } else {
             $(document).ready(function () {
@@ -174,11 +176,14 @@ window.onload = function () {
                   searchQuery +
                   "</span></span>"
               );
+			 $("#spinner").hide();
             });
           }
         })
         .catch((err) => {
           $(document).ready(function () {
+			  
+			$("#spinner").hide();
             $("#result").append(
               '<span class="error-message"> Pokemon Not found : <span id="poke_name">' +
                 err +
